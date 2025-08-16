@@ -50,9 +50,9 @@
   --shadow-2xl: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00);
   --tracking-normal: 0em;
   --spacing: 0.25rem;
-  --firm-gold: hsl(43 100% 50%);
-  --firm-dark: hsl(210 25% 15%);
-  --firm-light: hsl(220 14% 96%);
+  --firm-primary: #e14826;
+  --firm-secondary: #c5c755;
+  --firm-neutral: #b1b3bb;
 }
 
 .dark {
@@ -100,9 +100,9 @@
   --shadow-lg: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00), 0px 4px 6px -1px hsl(202.8169 89.1213% 53.1373% / 0.00);
   --shadow-xl: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00), 0px 8px 10px -1px hsl(202.8169 89.1213% 53.1373% / 0.00);
   --shadow-2xl: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0.00);
-  --firm-gold: hsl(43 100% 50%);
-  --firm-dark: hsl(210 25% 15%);
-  --firm-light: hsl(220 14% 96%);
+  --firm-primary: #e14826;
+  --firm-secondary: #c5c755;
+  --firm-neutral: #b1b3bb;
 }
 
 @layer base {

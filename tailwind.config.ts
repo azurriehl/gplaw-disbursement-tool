@@ -61,9 +61,9 @@ export default {
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
-        "firm-gold": "var(--firm-gold)",
-        "firm-dark": "var(--firm-dark)",
-        "firm-light": "var(--firm-light)",
+        "firm-primary": "var(--firm-primary)",
+        "firm-secondary": "var(--firm-secondary)",
+        "firm-neutral": "var(--firm-neutral)",
       },
       fontFamily: {
         sans: ["var(--font-sans)"],

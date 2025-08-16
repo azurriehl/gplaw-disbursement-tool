@@ -231,12 +231,12 @@ export default function CalculatorPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-gradient-to-r from-firm-gold to-yellow-500 shadow-lg" data-testid="header-calculator">
+      <header className="bg-gradient-to-r from-firm-primary to-red-500 shadow-lg" data-testid="header-calculator">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div className="bg-white p-3 rounded-lg shadow-md">
-                <Calculator className="text-firm-gold h-8 w-8" />
+                <Calculator className="text-firm-primary h-8 w-8" />
               </div>
               <div>
                 <h1 className="text-2xl sm:text-3xl font-bold text-white" data-testid="text-calculator-title">
@@ -259,28 +259,28 @@ export default function CalculatorPage() {
         {/* Property Type Selection */}
         <Card className="mb-8" data-testid="card-property-type">
           <CardHeader>
-            <CardTitle className="text-lg text-firm-dark">Select Property Type</CardTitle>
+            <CardTitle className="text-lg text-gray-700">Select Property Type</CardTitle>
           </CardHeader>
           <CardContent>
             <RadioGroup value={propertyType} onValueChange={setPropertyType} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="flex items-center space-x-2 p-4 border-2 border-gray-200 rounded-lg hover:border-firm-gold transition-colors">
+              <div className="flex items-center space-x-2 p-4 border-2 border-gray-200 rounded-lg hover:border-firm-primary transition-colors">
                 <RadioGroupItem value="land" id="land" data-testid="radio-property-land" />
                 <Label htmlFor="land" className="cursor-pointer flex-1">
-                  <div className="text-sm font-medium text-firm-dark">Land</div>
+                  <div className="text-sm font-medium text-gray-700">Land</div>
                   <div className="text-xs text-gray-500">Vacant land purchase</div>
                 </Label>
               </div>
-              <div className="flex items-center space-x-2 p-4 border-2 border-gray-200 rounded-lg hover:border-firm-gold transition-colors">
+              <div className="flex items-center space-x-2 p-4 border-2 border-gray-200 rounded-lg hover:border-firm-primary transition-colors">
                 <RadioGroupItem value="house" id="house" data-testid="radio-property-house" />
                 <Label htmlFor="house" className="cursor-pointer flex-1">
-                  <div className="text-sm font-medium text-firm-dark">House</div>
+                  <div className="text-sm font-medium text-gray-700">House</div>
                   <div className="text-xs text-gray-500">Detached dwelling</div>
                 </Label>
               </div>
-              <div className="flex items-center space-x-2 p-4 border-2 border-gray-200 rounded-lg hover:border-firm-gold transition-colors">
+              <div className="flex items-center space-x-2 p-4 border-2 border-gray-200 rounded-lg hover:border-firm-primary transition-colors">
                 <RadioGroupItem value="unit" id="unit" data-testid="radio-property-unit" />
                 <Label htmlFor="unit" className="cursor-pointer flex-1">
-                  <div className="text-sm font-medium text-firm-dark">Unit</div>
+                  <div className="text-sm font-medium text-gray-700">Unit</div>
                   <div className="text-xs text-gray-500">Apartment/townhouse</div>
                 </Label>
               </div>
@@ -290,7 +290,7 @@ export default function CalculatorPage() {
 
         {/* Calculator Table */}
         <Card className="overflow-hidden mb-8" data-testid="card-calculator-table">
-          <CardHeader className="bg-firm-gold">
+          <CardHeader className="bg-firm-primary">
             <CardTitle className="text-xl text-white">Disbursement Items</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
@@ -320,7 +320,7 @@ export default function CalculatorPage() {
                           <Checkbox
                             checked={!!selectedItems[item.id]}
                             onCheckedChange={(checked) => handleItemToggle(item.id, checked as boolean)}
-                            className="text-firm-gold focus:ring-firm-gold"
+                            className="text-firm-primary focus:ring-firm-primary"
                             data-testid={`checkbox-item-${item.id}`}
                           />
                           {propertyType && item.propertyTypes.includes(propertyType) && (
@@ -328,7 +328,7 @@ export default function CalculatorPage() {
                           )}
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-sm font-medium text-firm-dark">{item.description}</td>
+                      <td className="px-6 py-4 text-sm font-medium text-gray-700">{item.description}</td>
                       <td className="px-6 py-4 text-sm text-center tabular-nums">
                         {item.category === 'free' ? (
                           <span className="text-green-600 font-semibold">FREE</span>
@@ -368,7 +368,7 @@ export default function CalculatorPage() {
                         <Checkbox
                           checked={!!selectedItems[customItem.id]}
                           onCheckedChange={(checked) => handleCustomItemToggle(customItem.id, checked as boolean)}
-                          className="text-firm-gold focus:ring-firm-gold"
+                          className="text-firm-primary focus:ring-firm-primary"
                           data-testid={`checkbox-custom-${customItem.id}`}
                         />
                       </td>
@@ -420,7 +420,7 @@ export default function CalculatorPage() {
           <div className="lg:col-span-2">
             <Card data-testid="card-selected-items">
               <CardHeader>
-                <CardTitle className="text-lg text-firm-dark">Selected Items Summary</CardTitle>
+                <CardTitle className="text-lg text-gray-700">Selected Items Summary</CardTitle>
               </CardHeader>
               <CardContent>
                 {Object.keys(selectedItems).length === 0 ? (
@@ -446,16 +446,16 @@ export default function CalculatorPage() {
               <CardContent className="pt-6">
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-firm-dark font-medium">Subtotal:</span>
+                    <span className="text-gray-700 font-medium">Subtotal:</span>
                     <span className="text-lg font-semibold tabular-nums" data-testid="text-subtotal">{formatCurrency(subtotal)}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-firm-dark font-medium">GST:</span>
+                    <span className="text-gray-700 font-medium">GST:</span>
                     <span className="text-lg font-semibold tabular-nums" data-testid="text-gst">{formatCurrency(gst)}</span>
                   </div>
                   <div className="border-t pt-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-lg font-bold text-firm-dark">Total (inc. GST):</span>
+                      <span className="text-lg font-bold text-gray-700">Total (inc. GST):</span>
                       <span className="text-2xl font-bold text-green-600 tabular-nums" data-testid="text-total">{formatCurrency(total)}</span>
                     </div>
                   </div>
@@ -466,7 +466,7 @@ export default function CalculatorPage() {
             <div className="space-y-3">
               <Button 
                 onClick={handlePrint} 
-                className="w-full bg-firm-gold hover:bg-yellow-600 text-white font-semibold"
+                className="w-full bg-firm-primary hover:bg-red-600 text-white font-semibold"
                 data-testid="button-print"
               >
                 <Printer className="mr-2 h-4 w-4" />
@@ -486,7 +486,7 @@ export default function CalculatorPage() {
         </div>
       </div>
 
-      <footer className="bg-firm-dark text-white py-8 mt-12">
+      <footer className="bg-firm-neutral text-white py-8 mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <p className="text-gray-300 text-sm">
