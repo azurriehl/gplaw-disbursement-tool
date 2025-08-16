@@ -58,21 +58,140 @@ export type Calculation = typeof calculations.$inferSelect;
 
 // Static disbursement data that matches the design
 export const defaultDisbursementItems = [
-  { id: "professional-fees", description: "Professional fees", unitCost: "550.00", category: "standard" },
-  { id: "verification-id", description: "Verification of ID (per person on Title)", unitCost: "29.90", category: "standard" },
-  { id: "titles-search", description: "Titles search", unitCost: "40.39", category: "standard" },
-  { id: "registered-plan", description: "Registered Plan search", unitCost: "43.37", category: "standard" },
-  { id: "transport-roads", description: "Old Transport Main Roads", unitCost: "49.12", category: "standard" },
-  { id: "contaminated-land", description: "Contaminated Land search", unitCost: "76.03", category: "standard" },
-  { id: "heritage-search", description: "DEHP - Heritage search", unitCost: "90.18", category: "standard" },
-  { id: "qbcc-insurance", description: "QBCC - Insurance search", unitCost: "96.55", category: "standard" },
-  { id: "qcat-records", description: "QCAT Records (per person on Title)", unitCost: "37.58", category: "standard" },
-  { id: "council-rates", description: "Council Rates (Sunshine Coast)", unitCost: "147.42", category: "standard" },
-  { id: "water-services", description: "Water Services", unitCost: "262.85", category: "standard" },
-  { id: "body-corporate-cts", description: "Body Corporate CTS search", unitCost: "14.18", category: "standard" },
-  { id: "cms-dealing", description: "CMS Dealing search", unitCost: "69.11", category: "standard" },
-  { id: "body-corporate-cert", description: "Body Corporate Certificate", unitCost: "153.06", category: "standard" },
-  { id: "asic-search", description: "ASIC search (per entity)", unitCost: "30.45", category: "standard" },
-  { id: "qbcc-pool-safety", description: "QBCC Pool Safety Certificate search", unitCost: "0.00", category: "free" },
-  { id: "council-zoning", description: "Council Zoning", unitCost: "0.00", category: "free" },
+  { 
+    id: "professional-fees", 
+    description: "Professional fees", 
+    unitCost: "550.00", 
+    category: "standard",
+    propertyTypes: ["land", "house", "unit"],
+    gstIncluded: false
+  },
+  { 
+    id: "verification-id", 
+    description: "Verification of ID (per person on Title)", 
+    unitCost: "29.90", 
+    category: "standard",
+    propertyTypes: ["land", "house", "unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "titles-search", 
+    description: "Titles search", 
+    unitCost: "40.39", 
+    category: "standard",
+    propertyTypes: ["land", "house", "unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "registered-plan", 
+    description: "Registered Plan search", 
+    unitCost: "43.37", 
+    category: "standard",
+    propertyTypes: ["land", "house", "unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "transport-roads", 
+    description: "Old Transport Main Roads", 
+    unitCost: "49.12", 
+    category: "standard",
+    propertyTypes: ["land", "house", "unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "contaminated-land", 
+    description: "Contaminated Land search", 
+    unitCost: "76.03", 
+    category: "standard",
+    propertyTypes: ["house", "unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "heritage-search", 
+    description: "DEHP - Heritage search", 
+    unitCost: "90.18", 
+    category: "standard",
+    propertyTypes: ["land", "house", "unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "qbcc-insurance", 
+    description: "QBCC - Insurance search", 
+    unitCost: "96.55", 
+    category: "standard",
+    propertyTypes: ["house", "unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "qcat-records", 
+    description: "QCAT Records (per person on Title)", 
+    unitCost: "37.58", 
+    category: "standard",
+    propertyTypes: ["land", "house", "unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "council-rates", 
+    description: "Council Rates (Sunshine Coast)", 
+    unitCost: "147.42", 
+    category: "standard",
+    propertyTypes: ["land", "house", "unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "water-services", 
+    description: "Water Services", 
+    unitCost: "262.85", 
+    category: "standard",
+    propertyTypes: ["house", "unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "body-corporate-cts", 
+    description: "Body Corporate CTS search", 
+    unitCost: "14.18", 
+    category: "standard",
+    propertyTypes: ["unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "cms-dealing", 
+    description: "CMS Dealing search", 
+    unitCost: "69.11", 
+    category: "standard",
+    propertyTypes: ["house", "unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "body-corporate-cert", 
+    description: "Body Corporate Certificate", 
+    unitCost: "153.06", 
+    category: "standard",
+    propertyTypes: ["unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "asic-search", 
+    description: "ASIC search (per entity)", 
+    unitCost: "30.45", 
+    category: "standard",
+    propertyTypes: ["land", "house", "unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "qbcc-pool-safety", 
+    description: "QBCC Pool Safety Certificate search", 
+    unitCost: "0.00", 
+    category: "free",
+    propertyTypes: ["house", "unit"],
+    gstIncluded: true
+  },
+  { 
+    id: "council-zoning", 
+    description: "Council Zoning", 
+    unitCost: "0.00", 
+    category: "free",
+    propertyTypes: [],
+    gstIncluded: true
+  },
 ];

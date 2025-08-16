@@ -39,6 +39,32 @@ export default function CalculatorPage() {
     }).format(amount);
   };
 
+  // Auto-select items when property type changes
+  useEffect(() => {
+    if (propertyType) {
+      const newSelectedItems: { [key: string]: SelectedItem } = {};
+      const newQuantities: { [key: string]: number } = {};
+      
+      defaultDisbursementItems.forEach(item => {
+        if (item.propertyTypes.includes(propertyType)) {
+          const quantity = quantities[item.id] || 1;
+          const unitCost = parseFloat(item.unitCost);
+          newSelectedItems[item.id] = {
+            id: item.id,
+            description: item.description,
+            unitCost,
+            quantity,
+            total: unitCost * quantity
+          };
+          newQuantities[item.id] = quantity;
+        }
+      });
+      
+      setSelectedItems(newSelectedItems);
+      setQuantities(newQuantities);
+    }
+  }, [propertyType]);
+
   const handleItemToggle = (itemId: string, checked: boolean) => {
     const item = defaultDisbursementItems.find(i => i.id === itemId);
     if (!item) return;
@@ -155,10 +181,33 @@ export default function CalculatorPage() {
   };
 
   const calculateTotals = () => {
-    const subtotal = Object.values(selectedItems).reduce((sum, item) => sum + item.total, 0);
-    const gst = subtotal * 0.1;
-    const total = subtotal + gst;
-    return { subtotal, gst, total };
+    let subtotalExcGST = 0;
+    let gstAmount = 0;
+    
+    Object.values(selectedItems).forEach(selectedItem => {
+      const itemData = defaultDisbursementItems.find(item => item.id === selectedItem.id);
+      
+      if (itemData?.gstIncluded) {
+        // GST is already included in the price
+        const gstInclusiveTotal = selectedItem.total;
+        const exGstAmount = gstInclusiveTotal / 1.1; // Remove GST to get ex-GST amount
+        const gstOnItem = gstInclusiveTotal - exGstAmount;
+        
+        subtotalExcGST += exGstAmount;
+        gstAmount += gstOnItem;
+      } else {
+        // GST not included, need to add it
+        subtotalExcGST += selectedItem.total;
+        gstAmount += selectedItem.total * 0.1;
+      }
+    });
+    
+    const total = subtotalExcGST + gstAmount;
+    return { 
+      subtotal: subtotalExcGST, 
+      gst: gstAmount, 
+      total 
+    };
   };
 
   const { subtotal, gst, total } = calculateTotals();
@@ -260,23 +309,36 @@ export default function CalculatorPage() {
                   {defaultDisbursementItems.map((item) => (
                     <tr 
                       key={item.id} 
-                      className={`hover:bg-gray-50 transition-colors ${item.category === 'free' ? 'bg-green-50' : ''}`}
+                      className={`hover:bg-gray-50 transition-colors ${
+                        item.category === 'free' ? 'bg-green-50' : 
+                        propertyType && item.propertyTypes.includes(propertyType) ? 'bg-blue-50' : ''
+                      }`}
                       data-testid={`row-disbursement-${item.id}`}
                     >
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <Checkbox
-                          checked={!!selectedItems[item.id]}
-                          onCheckedChange={(checked) => handleItemToggle(item.id, checked as boolean)}
-                          className="text-firm-gold focus:ring-firm-gold"
-                          data-testid={`checkbox-item-${item.id}`}
-                        />
+                        <div className="flex items-center space-x-2">
+                          <Checkbox
+                            checked={!!selectedItems[item.id]}
+                            onCheckedChange={(checked) => handleItemToggle(item.id, checked as boolean)}
+                            className="text-firm-gold focus:ring-firm-gold"
+                            data-testid={`checkbox-item-${item.id}`}
+                          />
+                          {propertyType && item.propertyTypes.includes(propertyType) && (
+                            <span className="text-xs text-blue-600 font-medium">AUTO</span>
+                          )}
+                        </div>
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-firm-dark">{item.description}</td>
                       <td className="px-6 py-4 text-sm text-center tabular-nums">
                         {item.category === 'free' ? (
                           <span className="text-green-600 font-semibold">FREE</span>
                         ) : (
-                          formatCurrency(parseFloat(item.unitCost))
+                          <div className="flex flex-col items-center">
+                            <span>{formatCurrency(parseFloat(item.unitCost))}</span>
+                            <span className="text-xs text-gray-500">
+                              {item.gstIncluded ? '(inc GST)' : '(+ GST)'}
+                            </span>
+                          </div>
                         )}
                       </td>
                       <td className="px-6 py-4 text-sm text-center">
