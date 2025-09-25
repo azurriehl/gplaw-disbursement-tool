@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Calculator, Printer, RotateCcw } from "lucide-react";
+import { Calculator, Printer, RotateCcw, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -27,10 +27,8 @@ export default function CalculatorPage() {
   const [propertyType, setPropertyType] = useState<string>("");
   const [selectedItems, setSelectedItems] = useState<{ [key: string]: SelectedItem }>({});
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
-  const [customItems, setCustomItems] = useState<{ [key: string]: CustomItem }>({
-    "other-1": { id: "other-1", description: "", unitCost: "", quantity: 1 },
-    "other-2": { id: "other-2", description: "", unitCost: "", quantity: 1 }
-  });
+  const [customItems, setCustomItems] = useState<{ [key: string]: CustomItem }>({});
+  const [nextCustomItemId, setNextCustomItemId] = useState<number>(1);
 
   const formatCurrency = (amount: number): string => {
     return new Intl.NumberFormat('en-AU', {
@@ -151,6 +149,15 @@ export default function CalculatorPage() {
     }
   };
 
+  const addCustomItem = () => {
+    const newItemId = `custom-${nextCustomItemId}`;
+    setCustomItems(prev => ({
+      ...prev,
+      [newItemId]: { id: newItemId, description: "", unitCost: "", quantity: 1 }
+    }));
+    setNextCustomItemId(prev => prev + 1);
+  };
+
   const handleCustomItemChange = (itemId: string, field: 'description' | 'unitCost', value: string) => {
     setCustomItems(prev => ({
       ...prev,
@@ -221,10 +228,8 @@ export default function CalculatorPage() {
       setPropertyType("");
       setSelectedItems({});
       setQuantities({});
-      setCustomItems({
-        "other-1": { id: "other-1", description: "", unitCost: "", quantity: 1 },
-        "other-2": { id: "other-2", description: "", unitCost: "", quantity: 1 }
-      });
+      setCustomItems({});
+      setNextCustomItemId(1);
     }
   };
 
@@ -358,57 +363,89 @@ export default function CalculatorPage() {
                   ))}
                   
                   {/* Custom Items */}
-                  {Object.values(customItems).map((customItem) => (
-                    <tr 
-                      key={customItem.id} 
-                      className="hover:bg-gray-50 transition-colors bg-blue-50"
-                      data-testid={`row-custom-${customItem.id}`}
-                    >
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <Checkbox
-                          checked={!!selectedItems[customItem.id]}
-                          onCheckedChange={(checked) => handleCustomItemToggle(customItem.id, checked as boolean)}
-                          className="text-firm-primary focus:ring-firm-primary"
-                          data-testid={`checkbox-custom-${customItem.id}`}
-                        />
-                      </td>
-                      <td className="px-6 py-4">
-                        <Input
-                          type="text"
-                          placeholder="Enter custom item description"
-                          value={customItem.description}
-                          onChange={(e) => handleCustomItemChange(customItem.id, 'description', e.target.value)}
-                          className="w-full"
-                          data-testid={`input-custom-description-${customItem.id}`}
-                        />
-                      </td>
-                      <td className="px-6 py-4 text-sm text-center">
-                        <Input
-                          type="number"
-                          placeholder="0.00"
-                          step="0.01"
-                          min="0"
-                          value={customItem.unitCost}
-                          onChange={(e) => handleCustomItemChange(customItem.id, 'unitCost', e.target.value)}
-                          className="w-20 text-center"
-                          data-testid={`input-custom-cost-${customItem.id}`}
-                        />
-                      </td>
-                      <td className="px-6 py-4 text-sm text-center">
-                        <Input
-                          type="number"
-                          min="1"
-                          value={customItem.quantity}
-                          onChange={(e) => handleQuantityChange(customItem.id, parseInt(e.target.value) || 1)}
-                          className="w-16 text-center"
-                          data-testid={`input-custom-quantity-${customItem.id}`}
-                        />
-                      </td>
-                      <td className="px-6 py-4 text-sm text-center font-semibold tabular-nums" data-testid={`text-custom-total-${customItem.id}`}>
-                        {selectedItems[customItem.id] ? formatCurrency(selectedItems[customItem.id].total) : formatCurrency(0)}
+                  {Object.values(customItems).length === 0 ? (
+                    <tr>
+                      <td colSpan={5} className="px-6 py-4 text-center">
+                        <Button
+                          onClick={addCustomItem}
+                          variant="outline"
+                          className="text-firm-primary border-firm-primary hover:bg-firm-primary hover:text-white"
+                          data-testid="button-add-custom-item"
+                        >
+                          <Plus className="mr-2 h-4 w-4" />
+                          Add custom item
+                        </Button>
                       </td>
                     </tr>
-                  ))}
+                  ) : (
+                    <>
+                      {Object.values(customItems).map((customItem) => (
+                        <tr 
+                          key={customItem.id} 
+                          className="hover:bg-gray-50 transition-colors bg-blue-50"
+                          data-testid={`row-custom-${customItem.id}`}
+                        >
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <Checkbox
+                              checked={!!selectedItems[customItem.id]}
+                              onCheckedChange={(checked) => handleCustomItemToggle(customItem.id, checked as boolean)}
+                              className="text-firm-primary focus:ring-firm-primary"
+                              data-testid={`checkbox-custom-${customItem.id}`}
+                            />
+                          </td>
+                          <td className="px-6 py-4">
+                            <Input
+                              type="text"
+                              placeholder="Enter custom item description"
+                              value={customItem.description}
+                              onChange={(e) => handleCustomItemChange(customItem.id, 'description', e.target.value)}
+                              className="w-full"
+                              data-testid={`input-custom-description-${customItem.id}`}
+                            />
+                          </td>
+                          <td className="px-6 py-4 text-sm text-center">
+                            <Input
+                              type="number"
+                              placeholder="0.00"
+                              step="0.01"
+                              min="0"
+                              value={customItem.unitCost}
+                              onChange={(e) => handleCustomItemChange(customItem.id, 'unitCost', e.target.value)}
+                              className="w-20 text-center"
+                              data-testid={`input-custom-cost-${customItem.id}`}
+                            />
+                          </td>
+                          <td className="px-6 py-4 text-sm text-center">
+                            <Input
+                              type="number"
+                              min="1"
+                              value={customItem.quantity}
+                              onChange={(e) => handleQuantityChange(customItem.id, parseInt(e.target.value) || 1)}
+                              className="w-16 text-center"
+                              data-testid={`input-custom-quantity-${customItem.id}`}
+                            />
+                          </td>
+                          <td className="px-6 py-4 text-sm text-center font-semibold tabular-nums" data-testid={`text-custom-total-${customItem.id}`}>
+                            {selectedItems[customItem.id] ? formatCurrency(selectedItems[customItem.id].total) : formatCurrency(0)}
+                          </td>
+                        </tr>
+                      ))}
+                      <tr>
+                        <td colSpan={5} className="px-6 py-4 text-center">
+                          <Button
+                            onClick={addCustomItem}
+                            variant="outline"
+                            size="sm"
+                            className="text-firm-primary border-firm-primary hover:bg-firm-primary hover:text-white"
+                            data-testid="button-add-another-custom-item"
+                          >
+                            <Plus className="mr-2 h-4 w-4" />
+                            Add another custom item
+                          </Button>
+                        </td>
+                      </tr>
+                    </>
+                  )}
                 </tbody>
               </table>
             </div>
