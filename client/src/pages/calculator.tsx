@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Calculator, Printer, RotateCcw, Plus, Lock, Bookmark } from "lucide-react";
+import { Calculator, Printer, RotateCcw, Plus, Lock, Bookmark, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -186,6 +186,29 @@ export default function CalculatorPage() {
         return newItems;
       });
     }
+  };
+
+  const deleteCustomItem = (itemId: string) => {
+    // Remove from custom items
+    setCustomItems(prev => {
+      const newItems = { ...prev };
+      delete newItems[itemId];
+      return newItems;
+    });
+
+    // Remove from selected items
+    setSelectedItems(prev => {
+      const newItems = { ...prev };
+      delete newItems[itemId];
+      return newItems;
+    });
+
+    // Remove from quantities
+    setQuantities(prev => {
+      const newQuantities = { ...prev };
+      delete newQuantities[itemId];
+      return newQuantities;
+    });
   };
 
   const calculateTotals = () => {
@@ -406,12 +429,23 @@ export default function CalculatorPage() {
                           data-testid={`row-custom-${customItem.id}`}
                         >
                           <td className="px-6 py-4 whitespace-nowrap">
-                            <Checkbox
-                              checked={!!selectedItems[customItem.id]}
-                              onCheckedChange={(checked) => handleCustomItemToggle(customItem.id, checked as boolean)}
-                              className="text-firm-primary focus:ring-firm-primary"
-                              data-testid={`checkbox-custom-${customItem.id}`}
-                            />
+                            <div className="flex items-center space-x-2">
+                              <Checkbox
+                                checked={!!selectedItems[customItem.id]}
+                                onCheckedChange={(checked) => handleCustomItemToggle(customItem.id, checked as boolean)}
+                                className="text-firm-primary focus:ring-firm-primary"
+                                data-testid={`checkbox-custom-${customItem.id}`}
+                              />
+                              <Button
+                                onClick={() => deleteCustomItem(customItem.id)}
+                                variant="ghost"
+                                size="sm"
+                                className="h-6 w-6 p-0 text-red-500 hover:text-red-700 hover:bg-red-50"
+                                data-testid={`button-delete-custom-${customItem.id}`}
+                              >
+                                <Trash2 className="h-3 w-3" />
+                              </Button>
+                            </div>
                           </td>
                           <td className="px-6 py-4">
                             <Input
