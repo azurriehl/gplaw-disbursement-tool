@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Calculator, Printer, RotateCcw, Plus, Lock, Bookmark, Trash2 } from "lucide-react";
+import { Calculator, Printer, RotateCcw, Plus, Lock, Bookmark, Trash2, HelpCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -8,6 +8,8 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { defaultDisbursementItems } from "@shared/schema";
+import { TutorialProvider, useTutorial } from "@/hooks/useTutorial";
+import Tutorial from "@/components/Tutorial";
 
 interface SelectedItem {
   id: string;
@@ -24,12 +26,13 @@ interface CustomItem {
   quantity: number;
 }
 
-export default function CalculatorPage() {
+function CalculatorPageContent() {
   const [propertyType, setPropertyType] = useState<string>("");
   const [selectedItems, setSelectedItems] = useState<{ [key: string]: SelectedItem }>({});
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
   const [customItems, setCustomItems] = useState<{ [key: string]: CustomItem }>({});
   const [nextCustomItemId, setNextCustomItemId] = useState<number>(1);
+  const { startTutorial, hasCompletedTutorial } = useTutorial();
 
   const formatCurrency = (amount: number): string => {
     return new Intl.NumberFormat('en-AU', {
@@ -274,11 +277,23 @@ export default function CalculatorPage() {
                 <p className="text-yellow-100 text-sm sm:text-base">Conveyancing fees and costs</p>
               </div>
             </div>
-            <div className="hidden sm:block">
-              <div className="bg-white bg-opacity-20 px-4 py-2 rounded-lg">
-                <p className="text-white text-sm font-medium">To be used for Seller Disclosure Statement (Form 2)</p>
-                <p className="text-yellow-100 text-xs">for both Residential & Commercial</p>
+            <div className="flex items-center space-x-4">
+              <div className="hidden sm:block">
+                <div className="bg-white bg-opacity-20 px-4 py-2 rounded-lg">
+                  <p className="text-white text-sm font-medium">To be used for Seller Disclosure Statement (Form 2)</p>
+                  <p className="text-yellow-100 text-xs">for both Residential & Commercial</p>
+                </div>
               </div>
+              <Button
+                onClick={startTutorial}
+                variant="ghost"
+                size="sm"
+                className="text-white hover:bg-white hover:bg-opacity-20 transition-colors"
+                data-testid="button-start-tutorial"
+              >
+                <HelpCircle className="h-5 w-5 mr-2" />
+                Tutorial
+              </Button>
             </div>
           </div>
         </div>
@@ -291,7 +306,7 @@ export default function CalculatorPage() {
             <CardTitle className="text-lg font-bold" style={{fontFamily: "'Montserrat', system-ui, sans-serif", color: "var(--grey-700)"}}>Select Property Type</CardTitle>
           </CardHeader>
           <CardContent>
-            <RadioGroup value={propertyType} onValueChange={setPropertyType} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <RadioGroup value={propertyType} onValueChange={setPropertyType} className="grid grid-cols-1 sm:grid-cols-3 gap-4" data-testid="property-type-selection">
               <div className="flex items-center space-x-2 p-4 border-2 rounded-lg hover:border-firm-primary transition-colors" style={{borderColor: "var(--grey-200)"}}>
                 <RadioGroupItem value="land" id="land" data-testid="radio-property-land" />
                 <Label htmlFor="land" className="cursor-pointer flex-1">
@@ -604,6 +619,15 @@ export default function CalculatorPage() {
           </div>
         </div>
       </footer>
+      <Tutorial />
     </div>
+  );
+}
+
+export default function CalculatorPage() {
+  return (
+    <TutorialProvider>
+      <CalculatorPageContent />
+    </TutorialProvider>
   );
 }
