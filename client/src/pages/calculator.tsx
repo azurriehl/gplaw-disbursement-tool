@@ -234,7 +234,7 @@ export default function CalculatorPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen" style={{backgroundColor: "var(--grey-100)"}}>
       {/* Header */}
       <header className="bg-gradient-to-r from-firm-primary to-red-500 shadow-lg" data-testid="header-calculator">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -264,29 +264,29 @@ export default function CalculatorPage() {
         {/* Property Type Selection */}
         <Card className="mb-8 bg-white border-2" style={{borderColor: "#F47424"}} data-testid="card-property-type">
           <CardHeader>
-            <CardTitle className="text-lg text-gray-700 font-bold" style={{fontFamily: "'Montserrat', system-ui, sans-serif"}}>Select Property Type</CardTitle>
+            <CardTitle className="text-lg font-bold" style={{fontFamily: "'Montserrat', system-ui, sans-serif", color: "var(--grey-700)"}}>Select Property Type</CardTitle>
           </CardHeader>
           <CardContent>
             <RadioGroup value={propertyType} onValueChange={setPropertyType} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="flex items-center space-x-2 p-4 border-2 border-gray-200 rounded-lg hover:border-firm-primary transition-colors">
+              <div className="flex items-center space-x-2 p-4 border-2 rounded-lg hover:border-firm-primary transition-colors" style={{borderColor: "var(--grey-200)"}}>
                 <RadioGroupItem value="land" id="land" data-testid="radio-property-land" />
                 <Label htmlFor="land" className="cursor-pointer flex-1">
                   <div className="text-sm font-medium tracking-[0.2em]" style={{color: "#F47424"}}>LAND</div>
-                  <div className="text-xs text-gray-500">Vacant land purchase</div>
+                  <div className="text-xs" style={{color: "var(--grey-500)"}}>Vacant land purchase</div>
                 </Label>
               </div>
-              <div className="flex items-center space-x-2 p-4 border-2 border-gray-200 rounded-lg hover:border-firm-primary transition-colors">
+              <div className="flex items-center space-x-2 p-4 border-2 rounded-lg hover:border-firm-primary transition-colors" style={{borderColor: "var(--grey-200)"}}>
                 <RadioGroupItem value="house" id="house" data-testid="radio-property-house" />
                 <Label htmlFor="house" className="cursor-pointer flex-1">
                   <div className="text-sm font-medium tracking-[0.2em]" style={{color: "#F47424"}}>HOUSE</div>
-                  <div className="text-xs text-gray-500">Detached dwelling</div>
+                  <div className="text-xs" style={{color: "var(--grey-500)"}}>Detached dwelling</div>
                 </Label>
               </div>
-              <div className="flex items-center space-x-2 p-4 border-2 border-gray-200 rounded-lg hover:border-firm-primary transition-colors">
+              <div className="flex items-center space-x-2 p-4 border-2 rounded-lg hover:border-firm-primary transition-colors" style={{borderColor: "var(--grey-200)"}}>
                 <RadioGroupItem value="unit" id="unit" data-testid="radio-property-unit" />
                 <Label htmlFor="unit" className="cursor-pointer flex-1">
                   <div className="text-sm font-medium tracking-[0.2em]" style={{color: "#F47424"}}>UNIT</div>
-                  <div className="text-xs text-gray-500">Apartment/townhouse</div>
+                  <div className="text-xs" style={{color: "var(--grey-500)"}}>Apartment/townhouse</div>
                 </Label>
               </div>
             </RadioGroup>
@@ -301,20 +301,20 @@ export default function CalculatorPage() {
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <table className="w-full">
-                <thead className="bg-gray-50">
+                <thead style={{backgroundColor: "var(--grey-100)"}}>
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Select</th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Unit Cost</th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Qty</th>
-                    <th className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Cost</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{color: "var(--grey-500)"}}>Select</th>
+                    <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider" style={{color: "var(--grey-500)"}}>Description</th>
+                    <th className="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider" style={{color: "var(--grey-500)"}}>Unit Cost</th>
+                    <th className="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider" style={{color: "var(--grey-500)"}}>Qty</th>
+                    <th className="px-6 py-3 text-center text-xs font-medium uppercase tracking-wider" style={{color: "var(--grey-500)"}}>Cost</th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white divide-y" style={{borderColor: "var(--grey-200)"}}>
                   {defaultDisbursementItems.map((item) => (
                     <tr 
                       key={item.id} 
-                      className={`hover:bg-gray-50 transition-colors ${
+                      className={`hover-grey transition-colors ${
                         item.category === 'free' ? 'bg-green-50' : 
                         propertyType && item.propertyTypes.includes(propertyType) ? 'bg-blue-50' : ''
                       }`}
@@ -333,14 +333,14 @@ export default function CalculatorPage() {
                           )}
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-sm font-medium text-gray-700">{item.description}</td>
+                      <td className="px-6 py-4 text-sm font-medium" style={{color: "var(--grey-700)"}}>{item.description}</td>
                       <td className="px-6 py-4 text-sm text-center tabular-nums">
                         {item.category === 'free' ? (
                           <span className="text-green-600 font-semibold">FREE</span>
                         ) : (
                           <div className="flex flex-col items-center">
                             <span>{formatCurrency(parseFloat(item.unitCost))}</span>
-                            <span className="text-xs text-gray-500">
+                            <span className="text-xs" style={{color: "var(--grey-500)"}}>
                               {item.gstIncluded ? '(inc GST)' : '(+ GST)'}
                             </span>
                           </div>
@@ -370,7 +370,7 @@ export default function CalculatorPage() {
                         <Button
                           onClick={addCustomItem}
                           variant="ghost"
-                          className="text-firm-primary border-0 hover:bg-[#fee0c8] hover:text-firm-primary w-full justify-start"
+                          className="text-firm-primary border-0 hover:bg-[#ecebec] hover:text-firm-primary w-full justify-start"
                           data-testid="button-add-custom-item"
                         >
                           <Plus className="mr-2 h-4 w-4" />
@@ -386,7 +386,7 @@ export default function CalculatorPage() {
                       {Object.values(customItems).map((customItem) => (
                         <tr 
                           key={customItem.id} 
-                          className="hover:bg-gray-50 transition-colors bg-blue-50"
+                          className="hover-grey transition-colors bg-blue-50"
                           data-testid={`row-custom-${customItem.id}`}
                         >
                           <td className="px-6 py-4 whitespace-nowrap">
@@ -441,7 +441,7 @@ export default function CalculatorPage() {
                             onClick={addCustomItem}
                             variant="ghost"
                             size="sm"
-                            className="text-firm-primary border-0 hover:bg-[#fee0c8] hover:text-firm-primary w-full justify-start"
+                            className="text-firm-primary border-0 hover:bg-[#ecebec] hover:text-firm-primary w-full justify-start"
                             data-testid="button-add-another-custom-item"
                           >
                             <Plus className="mr-2 h-4 w-4" />
@@ -465,15 +465,15 @@ export default function CalculatorPage() {
           <div className="lg:col-span-2">
             <Card className="bg-white border-2" style={{borderColor: "#F47424"}} data-testid="card-selected-items">
               <CardHeader>
-                <CardTitle className="text-lg text-gray-700 font-bold" style={{fontFamily: "'Montserrat', system-ui, sans-serif"}}>Selected Items Summary</CardTitle>
+                <CardTitle className="text-lg font-bold" style={{fontFamily: "'Montserrat', system-ui, sans-serif", color: "var(--grey-700)"}}>Selected Items Summary</CardTitle>
               </CardHeader>
               <CardContent>
                 {Object.keys(selectedItems).length === 0 ? (
-                  <p className="text-gray-500 italic" data-testid="text-no-items">No items selected yet</p>
+                  <p className="italic" style={{color: "var(--grey-500)"}} data-testid="text-no-items">No items selected yet</p>
                 ) : (
                   <div className="space-y-2 text-sm">
                     {Object.values(selectedItems).map((item) => (
-                      <div key={item.id} className="flex justify-between items-center py-1 border-b border-gray-100" data-testid={`summary-item-${item.id}`}>
+                      <div key={item.id} className="flex justify-between items-center py-1 border-b" style={{borderColor: "var(--grey-200)"}} data-testid={`summary-item-${item.id}`}>
                         <span className="text-sm">
                           {item.description} {item.quantity > 1 ? `(×${item.quantity})` : ''}
                         </span>
@@ -491,16 +491,16 @@ export default function CalculatorPage() {
               <CardContent className="pt-6">
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-700 font-medium">Subtotal:</span>
+                    <span className="font-medium" style={{color: "var(--grey-700)"}}>Subtotal:</span>
                     <span className="text-lg font-semibold tabular-nums" data-testid="text-subtotal">{formatCurrency(subtotal)}</span>
                   </div>
                   <div className="flex justify-between items-center">
-                    <span className="text-gray-700 font-medium">GST:</span>
+                    <span className="font-medium" style={{color: "var(--grey-700)"}}>GST:</span>
                     <span className="text-lg font-semibold tabular-nums" data-testid="text-gst">{formatCurrency(gst)}</span>
                   </div>
                   <div className="border-t pt-3">
                     <div className="flex justify-between items-center">
-                      <span className="text-lg font-bold text-gray-700">Total (inc. GST):</span>
+                      <span className="text-lg font-bold" style={{color: "var(--grey-700)"}}>Total (inc. GST):</span>
                       <span className="text-2xl font-bold tabular-nums" style={{color: "#F47424"}} data-testid="text-total">{formatCurrency(total)}</span>
                     </div>
                   </div>
@@ -520,7 +520,7 @@ export default function CalculatorPage() {
               <Button 
                 onClick={handleReset} 
                 variant="ghost"
-                className="w-full text-firm-primary border-0 hover:bg-[#fee0c8] hover:text-firm-primary font-semibold"
+                className="w-full text-firm-primary border-0 hover:bg-[#ecebec] hover:text-firm-primary font-semibold"
                 data-testid="button-reset"
               >
                 <RotateCcw className="mr-2 h-4 w-4" />
@@ -534,10 +534,10 @@ export default function CalculatorPage() {
       <footer className="bg-firm-neutral text-white py-8 mt-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-gray-300 text-sm">
+            <p className="text-sm" style={{color: "var(--grey-400)"}}>
               This calculator provides estimates only. Final costs may vary based on specific circumstances.
             </p>
-            <p className="text-gray-400 text-xs mt-2">
+            <p className="text-xs mt-2" style={{color: "var(--grey-500)"}}>
               Generated: {new Date().toLocaleDateString()}
             </p>
           </div>

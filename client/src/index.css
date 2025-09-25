@@ -53,6 +53,13 @@
   --firm-primary: #f37424;
   --firm-secondary: #c5c755;
   --firm-neutral: #b1b3bb;
+  --grey-100: #F5F5F6;
+  --grey-200: #EBEBED;
+  --grey-300: #DCDCDF;
+  --grey-400: #CECDD2;
+  --grey-500: #B1B0B6;
+  --grey-600: #95949A;
+  --grey-700: #7C7B82;
 }
 
 .dark {
@@ -103,6 +110,13 @@
   --firm-primary: #f37424;
   --firm-secondary: #c5c755;
   --firm-neutral: #b1b3bb;
+  --grey-100: #F5F5F6;
+  --grey-200: #EBEBED;
+  --grey-300: #DCDCDF;
+  --grey-400: #CECDD2;
+  --grey-500: #B1B0B6;
+  --grey-600: #95949A;
+  --grey-700: #7C7B82;
 }
 
 @layer base {
@@ -118,4 +132,8 @@
 
 .tabular-nums {
   font-variant-numeric: tabular-nums;
+}
+
+.hover-grey:hover {
+  background-color: var(--grey-100);
 }
