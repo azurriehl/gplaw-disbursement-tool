@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Calculator, Printer, RotateCcw, Plus, Shield, Star } from "lucide-react";
+import { Calculator, Printer, RotateCcw, Plus, Lock, Bookmark } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -45,7 +45,7 @@ export default function CalculatorPage() {
       const newQuantities: { [key: string]: number } = {};
       
       defaultDisbursementItems.forEach(item => {
-        if (item.requirementLevels && item.requirementLevels[propertyType as keyof typeof item.requirementLevels] === 'required') {
+        if (item.requirementLevels && (item.requirementLevels[propertyType as keyof typeof item.requirementLevels] === 'required' || item.requirementLevels[propertyType as keyof typeof item.requirementLevels] === 'recommended')) {
           const quantity = quantities[item.id] || 1;
           const unitCost = parseFloat(item.unitCost);
           newSelectedItems[item.id] = {
@@ -315,10 +315,11 @@ export default function CalculatorPage() {
                   {defaultDisbursementItems.map((item) => (
                     <tr 
                       key={item.id} 
-                      className={`hover-grey transition-colors ${
-                        item.category === 'free' ? 'bg-green-50' : 
-                        propertyType && item.requirementLevels && item.requirementLevels[propertyType as keyof typeof item.requirementLevels] !== 'not-required' ? 'bg-blue-50' : ''
-                      }`}
+                      className={`hover-grey transition-colors`}
+                      style={{
+                        backgroundColor: item.category === 'free' ? '#fef7f0' : 
+                        (propertyType && item.requirementLevels && item.requirementLevels[propertyType as keyof typeof item.requirementLevels] !== 'not-required') ? '#fff1e5' : ''
+                      }}
                       data-testid={`row-disbursement-${item.id}`}
                     >
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -334,9 +335,9 @@ export default function CalculatorPage() {
                               <Tooltip>
                                 <TooltipTrigger>
                                   {item.requirementLevels[propertyType as keyof typeof item.requirementLevels] === 'required' ? (
-                                    <Shield className="h-4 w-4 text-red-600" />
+                                    <Lock className="h-4 w-4" style={{color: "#f47424"}} />
                                   ) : (
-                                    <Star className="h-4 w-4 text-blue-600" />
+                                    <Bookmark className="h-4 w-4" style={{color: "#f47424"}} />
                                   )}
                                 </TooltipTrigger>
                                 <TooltipContent>
@@ -350,7 +351,7 @@ export default function CalculatorPage() {
                       <td className="px-6 py-4 text-sm font-medium" style={{color: "var(--grey-700)"}}>{item.description}</td>
                       <td className="px-6 py-4 text-sm text-center tabular-nums">
                         {item.category === 'free' ? (
-                          <span className="text-green-600 font-semibold">FREE</span>
+                          <span className="font-semibold" style={{color: "#f47424"}}>FREE</span>
                         ) : (
                           <div className="flex flex-col items-center">
                             <span>{formatCurrency(parseFloat(item.unitCost))}</span>
@@ -400,7 +401,8 @@ export default function CalculatorPage() {
                       {Object.values(customItems).map((customItem) => (
                         <tr 
                           key={customItem.id} 
-                          className="hover-grey transition-colors bg-blue-50"
+                          className="hover-grey transition-colors"
+                          style={{backgroundColor: '#fff1e5'}}
                           data-testid={`row-custom-${customItem.id}`}
                         >
                           <td className="px-6 py-4 whitespace-nowrap">
@@ -525,11 +527,22 @@ export default function CalculatorPage() {
             <div className="space-y-3">
               <Button 
                 onClick={handlePrint} 
-                className="w-full bg-firm-primary hover:bg-red-600 text-white font-semibold"
+                className="w-full bg-firm-primary text-white font-semibold"
+                style={{
+                  transition: 'background-color 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = '#fff1e5';
+                  e.currentTarget.style.color = '#F47424';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = '#F47424';
+                  e.currentTarget.style.color = 'white';
+                }}
                 data-testid="button-print"
               >
                 <Printer className="mr-2 h-4 w-4" />
-                Printer Estimate
+                Print Estimate
               </Button>
               <Button 
                 onClick={handleReset} 
