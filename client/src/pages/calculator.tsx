@@ -244,7 +244,7 @@ export default function CalculatorPage() {
                 <Calculator className="text-firm-primary h-8 w-8" />
               </div>
               <div>
-                <h1 className="text-2xl sm:text-3xl font-bold text-white" data-testid="text-calculator-title">
+                <h1 className="text-2xl sm:text-3xl font-bold text-white tracking-[0.2em]" data-testid="text-calculator-title">
                   CALCULATOR
                 </h1>
                 <p className="text-yellow-100 text-sm sm:text-base">Conveyancing fees and costs</p>
@@ -262,9 +262,9 @@ export default function CalculatorPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Property Type Selection */}
-        <Card className="mb-8" data-testid="card-property-type">
+        <Card className="mb-8 bg-white border-2" style={{borderColor: "#F47424"}} data-testid="card-property-type">
           <CardHeader>
-            <CardTitle className="text-lg text-gray-700">Select Property Type</CardTitle>
+            <CardTitle className="text-lg text-gray-700 font-bold" style={{fontFamily: "'Montserrat', system-ui, sans-serif"}}>Select Property Type</CardTitle>
           </CardHeader>
           <CardContent>
             <RadioGroup value={propertyType} onValueChange={setPropertyType} className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -296,7 +296,7 @@ export default function CalculatorPage() {
         {/* Calculator Table */}
         <Card className="overflow-hidden mb-8" data-testid="card-calculator-table">
           <CardHeader className="bg-firm-primary">
-            <CardTitle className="text-xl text-white">Disbursement Items</CardTitle>
+            <CardTitle className="text-xl text-white font-bold" style={{fontFamily: "'Montserrat', system-ui, sans-serif"}}>Disbursement Items</CardTitle>
           </CardHeader>
           <CardContent className="p-0">
             <div className="overflow-x-auto">
@@ -463,9 +463,9 @@ export default function CalculatorPage() {
         {/* Totals Summary */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
-            <Card data-testid="card-selected-items">
+            <Card className="bg-white border-2" style={{borderColor: "#F47424"}} data-testid="card-selected-items">
               <CardHeader>
-                <CardTitle className="text-lg text-gray-700">Selected Items Summary</CardTitle>
+                <CardTitle className="text-lg text-gray-700 font-bold" style={{fontFamily: "'Montserrat', system-ui, sans-serif"}}>Selected Items Summary</CardTitle>
               </CardHeader>
               <CardContent>
                 {Object.keys(selectedItems).length === 0 ? (
@@ -487,7 +487,7 @@ export default function CalculatorPage() {
           </div>
           
           <div className="space-y-4">
-            <Card data-testid="card-totals">
+            <Card className="bg-white border-2" style={{borderColor: "#F47424"}} data-testid="card-totals">
               <CardContent className="pt-6">
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
@@ -501,7 +501,7 @@ export default function CalculatorPage() {
                   <div className="border-t pt-3">
                     <div className="flex justify-between items-center">
                       <span className="text-lg font-bold text-gray-700">Total (inc. GST):</span>
-                      <span className="text-2xl font-bold text-green-600 tabular-nums" data-testid="text-total">{formatCurrency(total)}</span>
+                      <span className="text-2xl font-bold tabular-nums" style={{color: "#F47424"}} data-testid="text-total">{formatCurrency(total)}</span>
                     </div>
                   </div>
                 </div>
@@ -519,8 +519,8 @@ export default function CalculatorPage() {
               </Button>
               <Button 
                 onClick={handleReset} 
-                variant="secondary"
-                className="w-full bg-gray-600 hover:bg-gray-700 text-white font-semibold"
+                variant="ghost"
+                className="w-full text-firm-primary border-0 hover:bg-[#fee0c8] hover:text-firm-primary font-semibold"
                 data-testid="button-reset"
               >
                 <RotateCcw className="mr-2 h-4 w-4" />
