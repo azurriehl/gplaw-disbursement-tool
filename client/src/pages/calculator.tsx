@@ -370,7 +370,7 @@ export default function CalculatorPage() {
                         <Button
                           onClick={addCustomItem}
                           variant="ghost"
-                          className="text-firm-primary border-0 hover:bg-[#ecebec] hover:text-firm-primary w-full justify-start"
+                          className="text-firm-primary border-0 hover-grey hover:text-firm-primary w-full justify-start"
                           data-testid="button-add-custom-item"
                         >
                           <Plus className="mr-2 h-4 w-4" />
@@ -441,7 +441,7 @@ export default function CalculatorPage() {
                             onClick={addCustomItem}
                             variant="ghost"
                             size="sm"
-                            className="text-firm-primary border-0 hover:bg-[#ecebec] hover:text-firm-primary w-full justify-start"
+                            className="text-firm-primary border-0 hover-grey hover:text-firm-primary w-full justify-start"
                             data-testid="button-add-another-custom-item"
                           >
                             <Plus className="mr-2 h-4 w-4" />
@@ -520,7 +520,7 @@ export default function CalculatorPage() {
               <Button 
                 onClick={handleReset} 
                 variant="ghost"
-                className="w-full text-firm-primary border-0 hover:bg-[#ecebec] hover:text-firm-primary font-semibold"
+                className="w-full text-firm-primary border-0 hover-grey hover:text-firm-primary font-semibold"
                 data-testid="button-reset"
               >
                 <RotateCcw className="mr-2 h-4 w-4" />
