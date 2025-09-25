@@ -64,7 +64,12 @@ export const defaultDisbursementItems = [
     unitCost: "550.00", 
     category: "standard",
     propertyTypes: ["land", "house", "unit"],
-    gstIncluded: false
+    gstIncluded: false,
+    requirementLevels: {
+      land: "required",
+      house: "required", 
+      unit: "required"
+    }
   },
   { 
     id: "verification-id", 
@@ -72,7 +77,12 @@ export const defaultDisbursementItems = [
     unitCost: "29.90", 
     category: "standard",
     propertyTypes: ["land", "house", "unit"],
-    gstIncluded: true
+    gstIncluded: true,
+    requirementLevels: {
+      land: "required",
+      house: "required", 
+      unit: "required"
+    }
   },
   { 
     id: "titles-search", 
@@ -80,7 +90,12 @@ export const defaultDisbursementItems = [
     unitCost: "40.39", 
     category: "standard",
     propertyTypes: ["land", "house", "unit"],
-    gstIncluded: true
+    gstIncluded: true,
+    requirementLevels: {
+      land: "required",
+      house: "required", 
+      unit: "required"
+    }
   },
   { 
     id: "registered-plan", 
@@ -88,23 +103,38 @@ export const defaultDisbursementItems = [
     unitCost: "43.37", 
     category: "standard",
     propertyTypes: ["land", "house", "unit"],
-    gstIncluded: true
+    gstIncluded: true,
+    requirementLevels: {
+      land: "required",
+      house: "required", 
+      unit: "required"
+    }
   },
   { 
     id: "transport-roads", 
     description: "Qld Transport and Main Roads Property search", 
     unitCost: "49.12", 
     category: "standard",
-    propertyTypes: ["land", "house", "unit"],
-    gstIncluded: true
+    propertyTypes: ["land", "house"],
+    gstIncluded: true,
+    requirementLevels: {
+      land: "required",
+      house: "required", 
+      unit: "not-required"
+    }
   },
   { 
     id: "contaminated-land", 
     description: "Contaminated Land search", 
     unitCost: "76.03", 
     category: "standard",
-    propertyTypes: ["house", "unit"],
-    gstIncluded: true
+    propertyTypes: ["land", "house"],
+    gstIncluded: true,
+    requirementLevels: {
+      land: "required",
+      house: "required", 
+      unit: "not-required"
+    }
   },
   { 
     id: "heritage-search", 
@@ -112,23 +142,38 @@ export const defaultDisbursementItems = [
     unitCost: "90.18", 
     category: "standard",
     propertyTypes: ["land", "house", "unit"],
-    gstIncluded: true
+    gstIncluded: true,
+    requirementLevels: {
+      land: "required",
+      house: "required", 
+      unit: "required"
+    }
   },
   { 
     id: "qbcc-insurance", 
     description: "QBCC - Insurance search", 
     unitCost: "96.55", 
     category: "standard",
-    propertyTypes: ["house", "unit"],
-    gstIncluded: true
+    propertyTypes: ["house"],
+    gstIncluded: true,
+    requirementLevels: {
+      land: "not-required",
+      house: "recommended", 
+      unit: "not-required"
+    }
   },
   { 
     id: "qcat-records", 
     description: "QCAT Records (per person on Title)", 
     unitCost: "37.58", 
     category: "standard",
-    propertyTypes: ["land", "house", "unit"],
-    gstIncluded: true
+    propertyTypes: ["land", "house"],
+    gstIncluded: true,
+    requirementLevels: {
+      land: "required",
+      house: "required", 
+      unit: "not-required"
+    }
   },
   { 
     id: "council-rates", 
@@ -136,15 +181,25 @@ export const defaultDisbursementItems = [
     unitCost: "147.42", 
     category: "standard",
     propertyTypes: ["land", "house", "unit"],
-    gstIncluded: true
+    gstIncluded: true,
+    requirementLevels: {
+      land: "recommended",
+      house: "recommended", 
+      unit: "recommended"
+    }
   },
   { 
     id: "water-services", 
     description: "Water Services", 
     unitCost: "262.85", 
     category: "standard",
-    propertyTypes: ["house", "unit"],
-    gstIncluded: true
+    propertyTypes: ["land", "house", "unit"],
+    gstIncluded: true,
+    requirementLevels: {
+      land: "recommended",
+      house: "recommended", 
+      unit: "recommended"
+    }
   },
   { 
     id: "body-corporate-cts", 
@@ -152,7 +207,12 @@ export const defaultDisbursementItems = [
     unitCost: "14.18", 
     category: "standard",
     propertyTypes: ["unit"],
-    gstIncluded: true
+    gstIncluded: true,
+    requirementLevels: {
+      land: "not-required",
+      house: "not-required", 
+      unit: "required"
+    }
   },
   { 
     id: "cms-dealing", 
@@ -160,7 +220,12 @@ export const defaultDisbursementItems = [
     unitCost: "69.11", 
     category: "standard",
     propertyTypes: ["house", "unit"],
-    gstIncluded: true
+    gstIncluded: true,
+    requirementLevels: {
+      land: "not-required",
+      house: "required", 
+      unit: "required"
+    }
   },
   { 
     id: "body-corporate-cert", 
@@ -168,7 +233,12 @@ export const defaultDisbursementItems = [
     unitCost: "153.06", 
     category: "standard",
     propertyTypes: ["unit"],
-    gstIncluded: true
+    gstIncluded: true,
+    requirementLevels: {
+      land: "not-required",
+      house: "not-required", 
+      unit: "required"
+    }
   },
   { 
     id: "asic-search", 
@@ -176,7 +246,12 @@ export const defaultDisbursementItems = [
     unitCost: "30.45", 
     category: "standard",
     propertyTypes: ["land", "house", "unit"],
-    gstIncluded: true
+    gstIncluded: true,
+    requirementLevels: {
+      land: "required",
+      house: "required", 
+      unit: "required"
+    }
   },
   { 
     id: "qbcc-pool-safety", 
@@ -184,14 +259,24 @@ export const defaultDisbursementItems = [
     unitCost: "0.00", 
     category: "free",
     propertyTypes: ["house", "unit"],
-    gstIncluded: true
+    gstIncluded: true,
+    requirementLevels: {
+      land: "not-required",
+      house: "recommended", 
+      unit: "recommended"
+    }
   },
   { 
     id: "council-zoning", 
     description: "Council Zoning", 
     unitCost: "0.00", 
     category: "free",
-    propertyTypes: [],
-    gstIncluded: true
+    propertyTypes: ["land", "house", "unit"],
+    gstIncluded: true,
+    requirementLevels: {
+      land: "required",
+      house: "required", 
+      unit: "required"
+    }
   },
 ];

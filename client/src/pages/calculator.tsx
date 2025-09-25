@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { Calculator, Printer, RotateCcw, Plus } from "lucide-react";
+import { Calculator, Printer, RotateCcw, Plus, Shield, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { defaultDisbursementItems } from "@shared/schema";
 
 interface SelectedItem {
@@ -44,7 +45,7 @@ export default function CalculatorPage() {
       const newQuantities: { [key: string]: number } = {};
       
       defaultDisbursementItems.forEach(item => {
-        if (item.propertyTypes.includes(propertyType)) {
+        if (item.requirementLevels && item.requirementLevels[propertyType as keyof typeof item.requirementLevels] === 'required') {
           const quantity = quantities[item.id] || 1;
           const unitCost = parseFloat(item.unitCost);
           newSelectedItems[item.id] = {
@@ -316,7 +317,7 @@ export default function CalculatorPage() {
                       key={item.id} 
                       className={`hover-grey transition-colors ${
                         item.category === 'free' ? 'bg-green-50' : 
-                        propertyType && item.propertyTypes.includes(propertyType) ? 'bg-blue-50' : ''
+                        propertyType && item.requirementLevels && item.requirementLevels[propertyType as keyof typeof item.requirementLevels] !== 'not-required' ? 'bg-blue-50' : ''
                       }`}
                       data-testid={`row-disbursement-${item.id}`}
                     >
@@ -328,8 +329,21 @@ export default function CalculatorPage() {
                             className="text-firm-primary focus:ring-firm-primary"
                             data-testid={`checkbox-item-${item.id}`}
                           />
-                          {propertyType && item.propertyTypes.includes(propertyType) && (
-                            <span className="text-xs text-blue-600 font-medium">AUTO</span>
+                          {propertyType && item.requirementLevels && item.requirementLevels[propertyType as keyof typeof item.requirementLevels] !== 'not-required' && (
+                            <TooltipProvider>
+                              <Tooltip>
+                                <TooltipTrigger>
+                                  {item.requirementLevels[propertyType as keyof typeof item.requirementLevels] === 'required' ? (
+                                    <Shield className="h-4 w-4 text-red-600" />
+                                  ) : (
+                                    <Star className="h-4 w-4 text-blue-600" />
+                                  )}
+                                </TooltipTrigger>
+                                <TooltipContent>
+                                  <p>{item.requirementLevels[propertyType as keyof typeof item.requirementLevels] === 'required' ? 'Required' : 'Recommended'}</p>
+                                </TooltipContent>
+                              </Tooltip>
+                            </TooltipProvider>
                           )}
                         </div>
                       </td>
