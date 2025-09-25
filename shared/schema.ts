@@ -92,7 +92,7 @@ export const defaultDisbursementItems = [
   },
   { 
     id: "transport-roads", 
-    description: "Old Transport Main Roads", 
+    description: "Qld Transport and Main Roads Property search", 
     unitCost: "49.12", 
     category: "standard",
     propertyTypes: ["land", "house", "unit"],
