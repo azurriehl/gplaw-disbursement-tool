@@ -365,17 +365,21 @@ export default function CalculatorPage() {
                   {/* Custom Items */}
                   {Object.values(customItems).length === 0 ? (
                     <tr>
-                      <td colSpan={5} className="px-6 py-4 text-center">
+                      <td className="px-6 py-4"></td>
+                      <td className="px-6 py-4">
                         <Button
                           onClick={addCustomItem}
-                          variant="outline"
-                          className="text-firm-primary border-firm-primary hover:bg-firm-primary hover:text-white"
+                          variant="ghost"
+                          className="text-firm-primary border-0 hover:bg-[#fee0c8] hover:text-firm-primary w-full justify-start"
                           data-testid="button-add-custom-item"
                         >
                           <Plus className="mr-2 h-4 w-4" />
                           Add custom item
                         </Button>
                       </td>
+                      <td className="px-6 py-4"></td>
+                      <td className="px-6 py-4"></td>
+                      <td className="px-6 py-4"></td>
                     </tr>
                   ) : (
                     <>
@@ -431,18 +435,22 @@ export default function CalculatorPage() {
                         </tr>
                       ))}
                       <tr>
-                        <td colSpan={5} className="px-6 py-4 text-center">
+                        <td className="px-6 py-4"></td>
+                        <td className="px-6 py-4">
                           <Button
                             onClick={addCustomItem}
-                            variant="outline"
+                            variant="ghost"
                             size="sm"
-                            className="text-firm-primary border-firm-primary hover:bg-firm-primary hover:text-white"
+                            className="text-firm-primary border-0 hover:bg-[#fee0c8] hover:text-firm-primary w-full justify-start"
                             data-testid="button-add-another-custom-item"
                           >
                             <Plus className="mr-2 h-4 w-4" />
                             Add another custom item
                           </Button>
                         </td>
+                        <td className="px-6 py-4"></td>
+                        <td className="px-6 py-4"></td>
+                        <td className="px-6 py-4"></td>
                       </tr>
                     </>
                   )}
