@@ -271,21 +271,21 @@ export default function CalculatorPage() {
               <div className="flex items-center space-x-2 p-4 border-2 border-gray-200 rounded-lg hover:border-firm-primary transition-colors">
                 <RadioGroupItem value="land" id="land" data-testid="radio-property-land" />
                 <Label htmlFor="land" className="cursor-pointer flex-1">
-                  <div className="text-sm font-medium text-gray-700">Land</div>
+                  <div className="text-sm font-medium tracking-[0.2em]" style={{color: "#F47424"}}>LAND</div>
                   <div className="text-xs text-gray-500">Vacant land purchase</div>
                 </Label>
               </div>
               <div className="flex items-center space-x-2 p-4 border-2 border-gray-200 rounded-lg hover:border-firm-primary transition-colors">
                 <RadioGroupItem value="house" id="house" data-testid="radio-property-house" />
                 <Label htmlFor="house" className="cursor-pointer flex-1">
-                  <div className="text-sm font-medium text-gray-700">House</div>
+                  <div className="text-sm font-medium tracking-[0.2em]" style={{color: "#F47424"}}>HOUSE</div>
                   <div className="text-xs text-gray-500">Detached dwelling</div>
                 </Label>
               </div>
               <div className="flex items-center space-x-2 p-4 border-2 border-gray-200 rounded-lg hover:border-firm-primary transition-colors">
                 <RadioGroupItem value="unit" id="unit" data-testid="radio-property-unit" />
                 <Label htmlFor="unit" className="cursor-pointer flex-1">
-                  <div className="text-sm font-medium text-gray-700">Unit</div>
+                  <div className="text-sm font-medium tracking-[0.2em]" style={{color: "#F47424"}}>UNIT</div>
                   <div className="text-xs text-gray-500">Apartment/townhouse</div>
                 </Label>
               </div>
