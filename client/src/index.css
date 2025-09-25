@@ -135,9 +135,9 @@
 }
 
 .hover-grey:hover {
-  background-color: var(--grey-200);
+  background-color: var(--grey-700);
 }
 
 .button-hover-grey:hover {
-  background-color: var(--grey-200) !important;
+  background-color: var(--grey-700) !important;
 }
